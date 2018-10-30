@@ -51,13 +51,13 @@ def get_longest_state(data):
     """Receives data, which can be the us_state_abbrev dict or the states
        list (see above). It returns the longest state measured by the length
        of the string"""
-    longest = 0
+    longest = 'x'
     if type(data) is dict:
-        states = data.values()
+        states = data.keys()
     else:
         states = data
     for state in states:
-        if len(state) > longest:
+        if len(state) > len(longest):
             longest = state
     return longest
 
@@ -68,4 +68,8 @@ def combine_state_names_and_abbreviations(us_state_abbrev=us_state_abbrev,
        the us_state_abbrev dict, and the last 10 states from the states
        list (see above) and combine them into a new list without losing
        alphabetical order"""
-    pass
+    abrevs = list(us_state_abbrev.values())
+    abrevs.sort()
+    states.sort()
+    return abrevs[:10] + states[-10:]
+
